@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ES6 Features Interactive Demo</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2em; }
+        .section { margin-bottom: 1.5em; }
+        button { margin-top: 0.5em; }
+        .output { margin-top: 0.5em; padding: 0.3em 0.6em; background: #f3f3f3; }
+    </style>
+</head>
+<body>
+    <h2>ES6 Features Interactive Demo</h2>
+
+    <div class="section" id="dom-manipulation">
+        <h3>Basic DOM Manipulation</h3>
+        <button onclick="changeText()">Change Text</button>
+        <div class="output" id="dom-output">Original content</div>
+    </div>
+
+    <div class="section" id="arrow-fn">
+        <h3>Arrow Function</h3>
+        <button onclick="showSquare()">Show Square of 5</button>
+        <div class="output" id="arrow-output"></div>
+    </div>
+
+    <div class="section" id="spread-operator">
+        <h3>Spread Operator</h3>
+        <button onclick="mergeArrays()">Merge Arrays</button>
+        <div class="output" id="spread-output"></div>
+    </div>
+
+    <div class="section" id="rest-operator">
+        <h3>Rest Operator</h3>
+        <button onclick="sumRest(1,2,3,4)">Sum Numbers (1,2,3,4)</button>
+        <div class="output" id="rest-output"></div>
+    </div>
+
+    <div class="section" id="template">
+        <h3>Template Literals & Type Correction</h3>
+        <input type="text" id="nameInput" placeholder="Enter name">
+        <button onclick="greetTemplate()">Greet</button>
+        <div class="output" id="template-output"></div>
+    </div>
+
+    <div class="section" id="hoisting">
+        <h3>Hoisting</h3>
+        <button onclick="testHoisting()">Test Hoisting</button>
+        <div class="output" id="hoist-output"></div>
+    </div>
+
+    <div class="section" id="array-object">
+        <h3>Array & Object Example</h3>
+        <button onclick="arrayObjectExample()">Show Array/Object</button>
+        <div class="output" id="ao-output"></div>
+    </div>
+
+    <script>
+        // DOM Manipulation
+        function changeText() {
+            document.getElementById("dom-output").textContent = "Text changed by DOM manipulation!";
+        }
+
+        // Arrow Function
+        const square = x => x * x;
+        function showSquare() {
+            document.getElementById("arrow-output").textContent = `Square of 5 is ${square(5)}`; // Template literal
+        }
+
+        // Spread Operator
+        function mergeArrays() {
+            const arr1 = [1,2,3];
+            const arr2 = [4,5,6];
+            const combined = [...arr1, ...arr2]; // Using spread operator
+            document.getElementById("spread-output").textContent = `Merged array: [${combined.join(', ')}]`;
+        }
+
+        // Rest Operator
+        function sumRest(...nums) {
+            // Rest operator for variable arguments
+            const sum = nums.reduce((total,num) => total + num, 0);
+            document.getElementById("rest-output").textContent = `Sum: ${sum}`;
+        }
+
+        // Type Correction & Template Literals
+        function greetTemplate() {
+            let name = document.getElementById("nameInput").value;
+            name = String(name); // Type correction
+            document.getElementById("template-output").textContent =
+                `Hello, ${name || "Stranger"}! Welcome to the ES6 Demo.`;
+        }
+
+        // Hoisting Example
+        function testHoisting() {
+            let output = '';
+            output += `Before declaration: ${typeof hoistedVar}\n`; // undefined due to hoisting
+            var hoistedVar = 'Hoisted!';
+            output += `After declaration: ${hoistedVar}`;
+            document.getElementById("hoist-output").textContent = output;
+        }
+
+        // Array & Object with ES6
+        function arrayObjectExample() {
+            const nums = [10, 20, 30];
+            const person = { name: "Alice", age: 28 };
+            const { name, age } = person; // Destructuring
+            document.getElementById("ao-output").textContent =
+                `Array: [${nums.join(', ')}]\nObject: Name = ${name}, Age = ${age}`;
+        }
+    </script>
+</body>
+</html>
